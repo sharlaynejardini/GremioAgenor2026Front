@@ -1,0 +1,176 @@
+/* Estilos gerais */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.urna-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  padding: 20px;
+}
+
+.urna-box {
+  width: 900px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.urna-header {
+  background: #2c3e50;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.urna-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.urna-content {
+  display: flex;
+  min-height: 500px;
+  border-bottom: 1px solid #eee;
+}
+
+.urna-panel {
+  padding: 20px;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-panel {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+/* Estilos da seleção */
+.selecao-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.selecao-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.selecao-label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.selecao-input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: all 0.3s;
+}
+
+.selecao-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Display do número */
+.numero-display-container {
+  margin-top: 10px;
+}
+
+.numero-display-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.numero-display {
+  display: flex;
+  gap: 10px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.numero-digit {
+  background: #f0f0f0;
+  padding: 5px 15px;
+  border-radius: 5px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.numero-placeholder {
+  color: #ccc;
+  padding: 5px 15px;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Mensagens */
+.urna-message {
+  padding: 15px;
+  background: #f8f9fa;
+  text-align: center;
+  font-weight: 500;
+}
+
+.urna-message.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.message-text {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Footer */
+.urna-footer {
+  padding: 15px;
+  text-align: center;
+}
+
+.resultados-btn {
+  padding: 10px 20px;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.resultados-btn:hover {
+  background: #1a252f;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

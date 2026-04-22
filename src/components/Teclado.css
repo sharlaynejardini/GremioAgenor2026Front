@@ -1,0 +1,85 @@
+.teclado-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
+
+.teclado-numerico {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.tecla {
+  padding: 15px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tecla:hover {
+  background: #f0f0f0;
+}
+
+.tecla:active {
+  transform: scale(0.95);
+}
+
+.tecla:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.teclado-acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.acao-btn {
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.acao-btn:hover {
+  opacity: 0.9;
+}
+
+.acao-btn:active {
+  transform: scale(0.98);
+}
+
+.acao-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.branco {
+  background: #f8f9fa;
+  color: #6c757d;
+}
+
+.corrige {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.confirma {
+  background: #28a745;
+  color: white;
+}
