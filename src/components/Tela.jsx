@@ -8,6 +8,8 @@ import './Urna.css';
 const ordenarPorNome = (lista) =>
   [...lista].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
 
+const getAlunoId = (aluno) => aluno?.id ?? aluno?._id;
+
 const Tela = () => {
   const [anos, setAnos] = useState([]);
   const [alunos, setAlunos] = useState([]);
@@ -106,7 +108,7 @@ const Tela = () => {
   };
 
   const handleAlunoChange = (e) => {
-    const aluno = alunos.find(a => a.id === parseInt(e.target.value));
+    const aluno = alunos.find(a => String(getAlunoId(a)) === e.target.value);
     if (aluno?.jaVotou) {
       playErrorSound();
       alert('Este aluno já votou! Selecione outro.');
@@ -142,7 +144,7 @@ const Tela = () => {
     }
 
     try {
-      await api.post(`/alunos/${alunoSelecionado.id}/votar`, {
+      await api.post(`/alunos/${getAlunoId(alunoSelecionado)}/votar`, {
         numeroChapa: branco ? 0 : parseInt(input)
       });
       
@@ -219,13 +221,13 @@ const Tela = () => {
                 <div className="selecao-group">
                   <label>ALUNO:</label>
                   <select 
-                    value={alunoSelecionado?.id || ''} 
+                    value={getAlunoId(alunoSelecionado) || ''} 
                     onChange={handleAlunoChange}
                     disabled={confirmado}
                   >
                     <option value="">Selecione</option>
                     {alunos.map(a => (
-                      <option key={a.id} value={a.id}>{a.nome}</option>
+                      <option key={getAlunoId(a)} value={getAlunoId(a)}>{a.nome}</option>
                     ))}
                   </select>
                 </div>
