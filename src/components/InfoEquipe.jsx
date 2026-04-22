@@ -1,6 +1,17 @@
 import React from 'react';
 import './InfoEquipe.css';
 
+const imagensPorNumero = {
+  10: 'Pensadores.png',
+  20: 'Eternos.png',
+  30: 'Tigrão.png'
+};
+
+const getImagemChapa = (equipe) => {
+  const arquivo = imagensPorNumero[equipe?.numero] || `chapa-${equipe?.numero}.png`;
+  return `/imagens/${arquivo}`;
+};
+
 const InfoEquipe = ({ equipe, branco, nulo }) => {
   if (branco) {
     return (
@@ -27,10 +38,10 @@ const InfoEquipe = ({ equipe, branco, nulo }) => {
         <div className="info-nome-chapa">{equipe.nome}</div>
         <div className="info-imagem-container">
           <img 
-            src={`/imagens/chapa-${equipe.numero}.png`} 
+            src={getImagemChapa(equipe)} 
             alt={`Chapa ${equipe.nome}`}
             onError={(e) => {
-              e.target.src = '/imagens/default.png';
+              e.target.src = '/vite.svg';
               e.target.className = 'default-image';
             }}
           />
