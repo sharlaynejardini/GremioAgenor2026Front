@@ -81,7 +81,7 @@ const Tela = () => {
   };
 
   useEffect(() => {
-    if (input.length === 1) {
+    if (input.length === 2) {
       const chapaEncontrada = chapas.find(c => c.numero.toString() === input);
       setEquipe(chapaEncontrada || null);
       setNulo(!chapaEncontrada);
@@ -120,7 +120,13 @@ const Tela = () => {
 
   const handleNumero = (num) => {
     if (confirmado || !alunoSelecionado) return;
-    setInput(num);
+    setBranco(false);
+    setInput((valorAtual) => {
+      const novoValor = `${valorAtual}${num}`.slice(0, 2);
+      return ['1', '2', '3'].includes(novoValor) || ['10', '20', '30'].includes(novoValor)
+        ? novoValor
+        : valorAtual;
+    });
   };
 
   const handleBranco = () => {
@@ -140,6 +146,12 @@ const Tela = () => {
     if (!input && !branco) {
       playErrorSound();
       alert('Digite um número ou vote em branco!');
+      return;
+    }
+
+    if (input && input.length < 2) {
+      playErrorSound();
+      alert('Digite os dois números da chapa!');
       return;
     }
 

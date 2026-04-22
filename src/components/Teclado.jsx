@@ -5,7 +5,7 @@ const Teclado = ({ onNumero, onBranco, onCorrige, onConfirma, disabled }) => {
   const botoes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   
   // Lista dos números que devem estar desabilitados
-  const numerosDesabilitados = ['4', '5', '6', '7', '8', '9', '0'];
+  const numerosDesabilitados = ['4', '5', '6', '7', '8', '9'];
 
   return (
     <div className="teclado-container">
