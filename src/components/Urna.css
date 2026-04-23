@@ -186,7 +186,7 @@
 
 .urna-box {
   width: min(1120px, 96vw);
-  height: auto;
+  height: 720px;
   min-height: 720px;
   background: #d7d4c7;
   border: 4px solid #b8b2a1;
@@ -248,14 +248,16 @@
 }
 
 .urna-content {
-  flex: 1 0 auto;
-  min-height: 0;
+  flex: 0 0 556px;
+  height: 556px;
+  min-height: 556px;
   border: 0;
   gap: 18px;
 }
 
 .left-panel {
   flex: 1;
+  height: 556px;
   min-height: 0;
   gap: 14px;
   background: #efefe8;
@@ -270,6 +272,7 @@
 .right-panel {
   width: 320px;
   flex: 0 0 320px;
+  height: 556px;
   background: #262a2d;
   border: 4px solid #171a1d;
   border-radius: 8px;
@@ -332,8 +335,10 @@
 }
 
 .info-container {
-  flex: 1;
-  min-height: 260px;
+  flex: 1 1 auto;
+  height: 288px;
+  min-height: 288px;
+  max-height: 288px;
   display: flex;
 }
 
@@ -465,7 +470,15 @@
   }
 
   .urna-content {
+    height: auto;
+    min-height: 0;
+    flex: 0 0 auto;
     flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    height: auto;
   }
 
   .right-panel {
@@ -474,5 +487,11 @@
 
   .selecao-container {
     grid-template-columns: 1fr;
+  }
+
+  .info-container {
+    height: auto;
+    min-height: 260px;
+    max-height: none;
   }
 }
