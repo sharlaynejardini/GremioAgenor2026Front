@@ -34,7 +34,7 @@ const Resultados = () => {
   const [activeTab, setActiveTab] = useState('grafico');
   const navigate = useNavigate();
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+  const COLORS = ['#2563eb', '#16a34a', '#f59e0b', '#dc2626', '#7c3aed'];
 
   useEffect(() => {
     fetchResultados();
@@ -68,21 +68,33 @@ const Resultados = () => {
   };
 
   const totalVotos = dados.reduce((sum, item) => sum + item.votos, 0);
+  const chapaMaisVotada = dados.reduce(
+    (maior, item) => (item.votos > (maior?.votos ?? -1) ? item : maior),
+    null
+  );
+  const percentualMaisVotada = totalVotos && chapaMaisVotada
+    ? ((chapaMaisVotada.votos / totalVotos) * 100).toFixed(1)
+    : '0.0';
 
   return (
     <div className="resultados-container">
       {/* Cabeçalho de impressão (visível apenas na impressão) */}
       <div className="print-header">
-        <h1>Relatório de Resultados Eleitorais</h1>
+        <h1>Resultado das Eleições</h1>
         <p>Eleição {new Date().getFullYear()} - Gerado em: {new Date().toLocaleString('pt-BR')}</p>
       </div>
 
       <div className="resultados-card shadow">
         <div className="card-header-primary">
-          <h2>
-            <FontAwesomeIcon icon={faChartBar} className="me-2" />
-            Resultados da Votação
-          </h2>
+          <div className="header-title">
+            <span className="header-icon">
+              <FontAwesomeIcon icon={faChartBar} />
+            </span>
+            <div>
+              <h2>Resultados da Votação</h2>
+              <p>Grêmio Estudantil 2026</p>
+            </div>
+          </div>
           <div className="header-actions">
             <button 
               className="btn-refresh"
@@ -119,11 +131,53 @@ const Resultados = () => {
             </div>
           )}
 
-          <div className="results-summary">
-            <div className="total-votos">
-              <span className="label">Total de votos:</span>
-              <span className="value">{totalVotos}</span>
+          <div className="dashboard-metrics">
+            <div className="metric-card total-card">
+              <span className="metric-label">Total de votos</span>
+              <strong>{totalVotos}</strong>
             </div>
+            <div className="metric-card">
+              <span className="metric-label">Chapas</span>
+              <strong>{dados.length}</strong>
+            </div>
+            <div className="metric-card winner-card">
+              <span className="metric-label">Mais votada</span>
+              <strong>{chapaMaisVotada?.nome || '-'}</strong>
+              <small>{percentualMaisVotada}% dos votos</small>
+            </div>
+          </div>
+
+          {!loading && dados.length > 0 && (
+            <div className="candidate-cards">
+              {dados.map((item) => {
+                const percentual = totalVotos ? (item.votos / totalVotos) * 100 : 0;
+
+                return (
+                  <div className="candidate-card" key={item.nome}>
+                    <div className="candidate-card-header">
+                      <span className="candidate-dot" style={{ backgroundColor: item.fill }}></span>
+                      <strong>{item.nome}</strong>
+                    </div>
+                    <div className="candidate-card-body">
+                      <span>{item.votos} votos</span>
+                      <b>{percentual.toFixed(1)}%</b>
+                    </div>
+                    <div className="candidate-card-track">
+                      <div
+                        className="candidate-card-bar"
+                        style={{
+                          width: `${percentual}%`,
+                          backgroundColor: item.fill
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="results-summary">
             <div className="tab-buttons">
               <button
                 className={`tab-btn ${activeTab === 'grafico' ? 'active' : ''}`}
@@ -195,7 +249,7 @@ const Resultados = () => {
                           <Tooltip 
                             formatter={(value, name, props) => [
                               value,
-                              `${name}: ${((value / totalVotos) * 100).toFixed(1)}%`
+                              `${name}: ${totalVotos ? ((value / totalVotos) * 100).toFixed(1) : '0.0'}%`
                             ]}
                           />
                           <Legend />
@@ -235,12 +289,12 @@ const Resultados = () => {
                                   <div
                                     className="progress-bar"
                                     style={{ 
-                                      width: `${(item.votos / totalVotos) * 100}%`,
+                                      width: `${totalVotos ? (item.votos / totalVotos) * 100 : 0}%`,
                                       backgroundColor: item.fill
                                     }}
                                   >
                                     <span className="progress-text">
-                                      {(item.votos / totalVotos * 100).toFixed(1)}%
+                                      {totalVotos ? (item.votos / totalVotos * 100).toFixed(1) : '0.0'}%
                                     </span>
                                   </div>
                                 </div>
@@ -257,6 +311,53 @@ const Resultados = () => {
             <div className="no-results">
               <FontAwesomeIcon icon={faChartBar} size="2x" />
               <p>Nenhum resultado disponível para exibição</p>
+            </div>
+          )}
+
+          {!loading && dados.length > 0 && (
+            <div className="print-only print-results">
+              <div className="print-chart-card">
+                <h3>Percentual de Votos</h3>
+                <PieChart width={420} height={260}>
+                  <Pie
+                    data={dados}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={92}
+                    dataKey="votos"
+                    nameKey="nome"
+                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(1)}%`}
+                  >
+                    {dados.map((entry, index) => (
+                      <Cell key={`print-cell-${index}`} fill={entry.fill} />
+                    ))}
+                  </Pie>
+                  <Legend />
+                </PieChart>
+              </div>
+
+              <div className="print-table-card">
+                <h3>Resumo por chapa</h3>
+                <table className="results-table">
+                  <thead>
+                    <tr>
+                      <th>Chapa</th>
+                      <th>Votos</th>
+                      <th>Percentual</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dados.map((item) => (
+                      <tr key={`print-${item.nome}`}>
+                        <td>{item.nome}</td>
+                        <td>{item.votos}</td>
+                        <td>{totalVotos ? (item.votos / totalVotos * 100).toFixed(1) : '0.0'}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </div>
