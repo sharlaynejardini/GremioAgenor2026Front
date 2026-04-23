@@ -209,7 +209,11 @@ const Tela = () => {
     <div className="urna-container">
       <div className="urna-box">
         <header className="urna-header">
-          <h1>VOTAÇÃO GRÊMIO ESTUDANTIL 2025</h1>
+          <div className="urna-brand">
+            <span>JUSTIÇA ELEITORAL</span>
+            <strong>URNA ELETRÔNICA</strong>
+          </div>
+          <h1>VOTAÇÃO GRÊMIO ESTUDANTIL 2026</h1>
         </header>
         
         <div className="urna-content">

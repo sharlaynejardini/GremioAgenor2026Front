@@ -80,3 +80,106 @@
   padding: 20px;
   background: white;
 }
+
+/* Tema de teste: painel interno da tela da urna */
+.info-equipe {
+  border-radius: 2px;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 14px 24px;
+}
+
+.info-equipe.vazio,
+.info-equipe.branco {
+  background: #ffffff;
+  border: 2px solid #222;
+  color: #1f2a33;
+}
+
+.info-equipe.nulo {
+  background: #fff4f2;
+  border: 2px solid #7c1f1f;
+  color: #7c1f1f;
+}
+
+.info-equipe.valido {
+  background: #ffffff;
+  border: 2px solid #222;
+  color: #101417;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(260px, 340px);
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center;
+  column-gap: 28px;
+  padding: 24px 28px;
+}
+
+.info-dados-chapa {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  justify-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.info-icon {
+  color: #30383f;
+}
+
+.info-numero-chapa {
+  font-family: "Courier New", monospace;
+  font-size: 3.8rem;
+  line-height: 1;
+  color: #101417;
+  margin: 0 0 20px;
+}
+
+.info-nome-chapa {
+  width: min(360px, 100%);
+  padding: 14px 18px;
+  background: #efefe9;
+  border: 1px solid #d1d1ca;
+  color: #101417;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 1.45rem;
+  letter-spacing: 0;
+}
+
+.info-imagem-container {
+  width: min(340px, 100%);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  border: 2px solid #222;
+  box-shadow: none;
+  background: #f7f7f2;
+  grid-column: 2;
+  grid-row: 1;
+  padding: 20px 14px 14px;
+}
+
+.info-imagem-container img {
+  object-fit: contain;
+  display: block;
+  background: #ffffff;
+}
+
+@media (max-width: 760px) {
+  .info-equipe.valido {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-imagem-container {
+    width: min(220px, 100%);
+  }
+}

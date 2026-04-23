@@ -3,7 +3,7 @@ import './InfoEquipe.css';
 
 const imagensPorNumero = {
   10: 'Pensadores.png',
-  20: 'Eternos.png',
+  20: 'eternos.png',
   30: 'Tigrão.png'
 };
 
@@ -34,8 +34,10 @@ const InfoEquipe = ({ equipe, branco, nulo }) => {
   if (equipe) {
     return (
       <div className="info-equipe valido">
-        <div className="info-numero-chapa">{equipe.numero}</div>
-        <div className="info-nome-chapa">{equipe.nome}</div>
+        <div className="info-dados-chapa">
+          <div className="info-numero-chapa">{equipe.numero}</div>
+          <div className="info-nome-chapa">{equipe.nome}</div>
+        </div>
         <div className="info-imagem-container">
           <img 
             src={getImagemChapa(equipe)} 

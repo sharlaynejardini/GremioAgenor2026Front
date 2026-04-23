@@ -174,3 +174,207 @@
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Tema de teste: visual inspirado na urna eletronica brasileira */
+.urna-container {
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.65), transparent 34%),
+    linear-gradient(135deg, #d9dde0 0%, #b8bec3 45%, #8f969b 100%);
+  padding: 24px;
+}
+
+.urna-box {
+  width: min(1120px, 96vw);
+  height: min(780px, calc(100vh - 24px));
+  background: #d7d4c7;
+  border: 4px solid #b8b2a1;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -8px 16px rgba(78, 73, 63, 0.22),
+    0 22px 48px rgba(26, 31, 35, 0.34);
+  overflow: visible;
+  padding: 18px;
+}
+
+.urna-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 18px;
+  background: transparent;
+  color: #1f2a33;
+  padding: 0 8px 16px;
+  text-align: left;
+}
+
+.urna-brand {
+  width: 185px;
+  min-height: 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 12px;
+  background: #f3f3ee;
+  border: 2px solid #b6b19f;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  color: #23313a;
+}
+
+.urna-brand span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.urna-brand strong {
+  font-size: 1.05rem;
+  line-height: 1.1;
+}
+
+.urna-header h1 {
+  margin: 0;
+  padding: 14px 18px;
+  background: #ecebe4;
+  border: 2px solid #b9b4a5;
+  border-radius: 4px;
+  font-size: 1.25rem;
+  color: #1f2a33;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.urna-content {
+  flex: 1;
+  min-height: 0;
+  border: 0;
+  gap: 18px;
+}
+
+.left-panel {
+  flex: 1;
+  min-height: 0;
+  gap: 18px;
+  background: #efefe8;
+  border: 4px solid #2b3135;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 2px #a6aaa8,
+    inset 0 0 24px rgba(0, 0, 0, 0.12);
+  padding: 22px;
+}
+
+.right-panel {
+  width: 320px;
+  flex: 0 0 320px;
+  background: #262a2d;
+  border: 4px solid #171a1d;
+  border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.selecao-container {
+  display: grid;
+  grid-template-columns: minmax(130px, 180px) 1fr;
+  align-items: end;
+  gap: 14px;
+}
+
+.selecao-group label,
+.numero-display-container > div:first-child {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #27323a;
+  text-transform: uppercase;
+}
+
+.selecao-group select {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 2px solid #777b78;
+  border-radius: 2px;
+  background: #ffffff;
+  color: #1e272e;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.numero-display-container {
+  margin-top: 0;
+  padding: 18px;
+  background: #fbfbf7;
+  border: 2px solid #b4b4ad;
+  border-radius: 3px;
+}
+
+.numero-display {
+  min-height: 64px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 2px solid #222;
+  font-family: "Courier New", monospace;
+  font-size: 3rem;
+  line-height: 1;
+  color: #101417;
+}
+
+.numero-placeholder {
+  color: #9a9a9a;
+}
+
+.info-container {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.urna-footer {
+  padding: 16px 8px 0;
+}
+
+.resultados-btn {
+  background: #283139;
+  border: 2px solid #14191d;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.resultados-btn:hover {
+  background: #1f262d;
+}
+
+@media (max-width: 860px) {
+  .urna-box {
+    height: auto;
+    min-height: calc(100vh - 24px);
+    padding: 12px;
+  }
+
+  .urna-header {
+    grid-template-columns: 1fr;
+  }
+
+  .urna-brand {
+    width: 100%;
+    align-items: center;
+  }
+
+  .urna-content {
+    flex-direction: column;
+  }
+
+  .right-panel {
+    width: 100%;
+  }
+
+  .selecao-container {
+    grid-template-columns: 1fr;
+  }
+}
