@@ -290,11 +290,9 @@ const Tela = () => {
           </div>
         </div>
 
-        <div className="urna-footer">
-          <button className="resultados-btn" onClick={handleResultados}>
-            VER RESULTADOS
-          </button>
-        </div>
+        <button className="resultados-btn" onClick={handleResultados}>
+          Ver resultados
+        </button>
       </div>
 
       {modalSenhaAberto && (

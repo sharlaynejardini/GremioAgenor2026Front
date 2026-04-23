@@ -188,6 +188,7 @@
   width: min(1120px, 96vw);
   height: 720px;
   min-height: 720px;
+  position: relative;
   background: #d7d4c7;
   border: 4px solid #b8b2a1;
   border-radius: 18px;
@@ -343,18 +344,30 @@
 }
 
 .urna-footer {
-  padding: 16px 8px 0;
+  display: none;
 }
 
 .resultados-btn {
-  background: #283139;
-  border: 2px solid #14191d;
+  position: absolute;
+  right: 26px;
+  bottom: 18px;
+  min-height: 30px;
+  padding: 0 12px;
+  background: rgba(40, 49, 57, 0.22);
+  color: rgba(23, 32, 42, 0.72);
+  border: 1px solid rgba(20, 25, 29, 0.18);
   border-radius: 4px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  opacity: 0.58;
 }
 
 .resultados-btn:hover {
-  background: #1f262d;
+  background: rgba(40, 49, 57, 0.34);
+  color: #17202a;
+  opacity: 0.9;
 }
 
 .senha-modal-overlay {
@@ -458,6 +471,7 @@
     height: auto;
     min-height: calc(100vh - 24px);
     padding: 12px;
+    padding-bottom: 54px;
   }
 
   .urna-header {
