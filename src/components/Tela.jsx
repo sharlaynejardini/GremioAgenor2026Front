@@ -297,15 +297,19 @@ const Tela = () => {
 
       {modalSenhaAberto && (
         <div className="senha-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="senha-modal-title">
-          <form className="senha-modal" onSubmit={handleSenhaSubmit}>
+          <form className="senha-modal" onSubmit={handleSenhaSubmit} autoComplete="off">
             <h2 id="senha-modal-title">Acesso aos resultados</h2>
             <label htmlFor="senha-resultados">Senha</label>
             <div className="senha-input-wrapper">
               <input
                 id="senha-resultados"
+                name="codigo-acesso-resultados"
                 type={mostrarSenha ? 'text' : 'password'}
                 value={senhaResultados}
                 onChange={(e) => setSenhaResultados(e.target.value)}
+                autoComplete="new-password"
+                data-lpignore="true"
+                data-1p-ignore="true"
                 autoFocus
               />
               <button
