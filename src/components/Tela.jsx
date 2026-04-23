@@ -192,7 +192,7 @@ const Tela = () => {
 
  const handleResultados = () => {
   const senha = prompt('Digite a senha para acessar os resultados:');
-  if (senha === '456789') {
+  if (senha === 'Agenor456789') {
     // Verifica se está no Render
     if (window.location.host.includes('render.com')) {
       window.location.href = window.location.origin + '/resultados';
