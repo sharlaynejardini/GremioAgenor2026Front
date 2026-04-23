@@ -3,6 +3,8 @@ import InfoEquipe from './InfoEquipe';
 import Teclado from './Teclado';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './Urna.css';
 
 const ordenarPorNome = (lista) =>
@@ -21,6 +23,9 @@ const Tela = () => {
   const [branco, setBranco] = useState(false);
   const [nulo, setNulo] = useState(false);
   const [confirmado, setConfirmado] = useState(false);
+  const [modalSenhaAberto, setModalSenhaAberto] = useState(false);
+  const [senhaResultados, setSenhaResultados] = useState('');
+  const [mostrarSenha, setMostrarSenha] = useState(false);
   const navigate = useNavigate();
 
   // Referências para os áudios
@@ -190,15 +195,27 @@ const Tela = () => {
     setAnoSelecionado('');
   };
 
- const handleResultados = () => {
-  const senha = prompt('Digite a senha para acessar os resultados:');
-  if (senha === 'Agenor456789') {
+ const acessarResultados = () => {
+  if (window.location.host.includes('render.com')) {
     // Verifica se está no Render
-    if (window.location.host.includes('render.com')) {
-      window.location.href = window.location.origin + '/resultados';
-    } else {
-      navigate('/resultados');
-    }
+    window.location.href = window.location.origin + '/resultados';
+  } else {
+    navigate('/resultados');
+  }
+};
+
+ const handleResultados = () => {
+  setSenhaResultados('');
+  setMostrarSenha(false);
+  setModalSenhaAberto(true);
+};
+
+ const handleSenhaSubmit = (e) => {
+  e.preventDefault();
+
+  if (senhaResultados === 'Agenor456789') {
+    setModalSenhaAberto(false);
+    acessarResultados();
   } else {
     playErrorSound();
     alert('Senha incorreta!');
@@ -279,6 +296,40 @@ const Tela = () => {
           </button>
         </div>
       </div>
+
+      {modalSenhaAberto && (
+        <div className="senha-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="senha-modal-title">
+          <form className="senha-modal" onSubmit={handleSenhaSubmit}>
+            <h2 id="senha-modal-title">Acesso aos resultados</h2>
+            <label htmlFor="senha-resultados">Senha</label>
+            <div className="senha-input-wrapper">
+              <input
+                id="senha-resultados"
+                type={mostrarSenha ? 'text' : 'password'}
+                value={senhaResultados}
+                onChange={(e) => setSenhaResultados(e.target.value)}
+                autoFocus
+              />
+              <button
+                type="button"
+                className="senha-toggle"
+                onClick={() => setMostrarSenha((visivel) => !visivel)}
+                aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
+              >
+                <FontAwesomeIcon icon={mostrarSenha ? faEyeSlash : faEye} />
+              </button>
+            </div>
+            <div className="senha-modal-actions">
+              <button type="button" className="senha-cancelar" onClick={() => setModalSenhaAberto(false)}>
+                Cancelar
+              </button>
+              <button type="submit" className="senha-confirmar">
+                Entrar
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
