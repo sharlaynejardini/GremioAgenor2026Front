@@ -4,12 +4,17 @@ import './InfoEquipe.css';
 const imagensPorNumero = {
   10: 'Pensadores.png',
   20: 'eternos.png',
-  30: 'Tigrão.png'
+  30: 'Lunar.png'
 };
 
 const getImagemChapa = (equipe) => {
   const arquivo = imagensPorNumero[equipe?.numero] || `chapa-${equipe?.numero}.png`;
   return `/imagens/${arquivo}`;
+};
+
+const getNomeExibicaoChapa = (equipe) => {
+  if (Number(equipe?.numero) === 30) return 'Lunar';
+  return equipe?.nome;
 };
 
 const InfoEquipe = ({ equipe, branco, nulo }) => {
@@ -36,12 +41,12 @@ const InfoEquipe = ({ equipe, branco, nulo }) => {
       <div className="info-equipe valido">
         <div className="info-dados-chapa">
           <div className="info-numero-chapa">{equipe.numero}</div>
-          <div className="info-nome-chapa">{equipe.nome}</div>
+          <div className="info-nome-chapa">{getNomeExibicaoChapa(equipe)}</div>
         </div>
         <div className="info-imagem-container">
           <img 
             src={getImagemChapa(equipe)} 
-            alt={`Chapa ${equipe.nome}`}
+            alt={`Chapa ${getNomeExibicaoChapa(equipe)}`}
             onError={(e) => {
               e.target.src = '/vite.svg';
               e.target.className = 'default-image';

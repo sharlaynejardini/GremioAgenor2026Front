@@ -27,6 +27,18 @@ import './Resultados.css';
 const ordenarPorNome = (lista) =>
   [...lista].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
 
+const normalizarTexto = (valor = '') =>
+  valor
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+
+const getNomeChapaExibicao = (nome, numero) => {
+  if (Number(numero) === 30) return 'Lunar';
+  if (normalizarTexto(nome).includes('tigrao')) return 'Lunar';
+  return nome;
+};
+
 const Resultados = () => {
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +59,7 @@ const Resultados = () => {
       const dadosFormatados = ordenarPorNome(
         res.data.map((item) => ({
           ...item,
-          nome: item.nomeChapa,
+          nome: getNomeChapaExibicao(item.nomeChapa, item.numeroChapa ?? item.numero),
           votos: item.totalVotos
         }))
       ).map((item, index) => ({
